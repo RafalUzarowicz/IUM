@@ -1,25 +1,36 @@
-from typing import Type
-
 from flask_restful import Resource
 from flask_restful import request
 
-from src.service.logger import Logger
-from src.service.models import Model
-from src.service.errors import error_messages
-from src.service.data_format import columns
+from service.logger import Logger
+from service.models import Model
+from service.errors import error_messages
+from service.data_format import columns
+
+
+def check_user_id(user_id) -> bool:
+    return isinstance(user_id, int)
+
+
+def check_data(data: {}) -> bool:
+    for column in columns:
+        # check if column exists
+        if data.get(column["name"]) is None:
+            return False
+        # TODO checks
+
+    return True
 
 
 class ModelResource(Resource):
     def __init__(self, simple_model: Model, complex_model: Model, logger: Logger):
         super()
         self.logger = logger
-        # Load models
         self.simple_model = simple_model
         self.complex_model = complex_model
 
     def get(self, user_id):
         # Check user id
-        if not self.check_user_id(user_id):
+        if not check_user_id(user_id):
             return {"error": error_messages["wrong_user_id"]}
 
         # Check request data type
@@ -32,7 +43,7 @@ class ModelResource(Resource):
             return {"error": error_messages["missing_json_data"]}
 
         # Validate data
-        if not self.check_data(product_data):
+        if not check_data(product_data):
             return {"error": error_messages["wrong_data"]}
 
         # Predict
@@ -44,18 +55,6 @@ class ModelResource(Resource):
 
         # Return result
         return {"result": result}
-
-    def check_data(self, data: {}) -> bool:
-        for column in columns:
-            # check if column exists
-            if data.get(column["name"]) is None:
-                return False
-            # TODO checks
-
-        return True
-
-    def check_user_id(self, user_id) -> bool:
-        return isinstance(user_id, int)
 
     def pick_model(self, user_id) -> Model:
         if user_id % 2 == 0:
