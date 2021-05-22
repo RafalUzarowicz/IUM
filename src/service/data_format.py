@@ -9,8 +9,8 @@ columns = [
     {"name": "city"},
     {"name": "street"}
 ]
-
-purchase_data = {
+# FIXME to tak sobie dla przykladu zrobilem pewnie do usuniecia albo jak sie uzupelni valid rzeczami to do testow
+purchase_data_example = {
     "purchase_timestamp": 0,
     "delivery_company": 1,
     "product_id": 2,

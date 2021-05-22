@@ -10,9 +10,9 @@ from src.service.data_format import columns
 
 
 class ModelResource(Resource):
-    def __init__(self, simple_model: Model, complex_model: Model):
+    def __init__(self, simple_model: Model, complex_model: Model, logger: Logger):
         super()
-        self.logger = Logger()
+        self.logger = logger
         # Load models
         self.simple_model = simple_model
         self.complex_model = complex_model
