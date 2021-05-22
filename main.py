@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_restful import Api
 
+from constants import MAXIMUM_LOGS_NUMBER, COMPLEX_MODEL_NAME, SIMPLE_MODEL_NAME
 from service.errors import Error
 from service.logger import Logger
 from service.modelresource import ModelResource
@@ -10,9 +11,9 @@ app = Flask("app_name")
 api = Api(app)
 
 # TODO tutaj uzupelnij modele <3
-simple_m = Model("simple", "")
-complex_m = Model("complex", "")
-logger = Logger()
+simple_m = Model(SIMPLE_MODEL_NAME, "")
+complex_m = Model(COMPLEX_MODEL_NAME, "")
+logger = Logger(MAXIMUM_LOGS_NUMBER)
 
 @app.errorhandler(Error)
 def handle_invalid_usage(error):

@@ -4,7 +4,7 @@ from datetime import datetime
 from pathlib import Path
 from threading import Thread
 
-from const import PROJECT_DIRECTORY
+from constants import PROJECT_DIRECTORY
 from service.models import Model
 
 
@@ -18,7 +18,7 @@ def save_to_file(file_name: str, logs: [], dir_name: str = "logs"):
 
 
 class Logger:
-    def __init__(self, save_iteration: int = 2):
+    def __init__(self, save_iteration: int = 10):
         self.logs_to_save = []
         self.save_iteration = save_iteration
         self.threads_list = []

@@ -17,7 +17,7 @@ def check_data(data: {}) -> bool:
         # check if column exists
         if data.get(column["name"]) is None:
             return False
-        # TODO checks
+        # TODO check types
 
     return True
 
