@@ -28,7 +28,7 @@ class Logger:
             thread.join()
 
     # TODO uzupelnic typ result
-    def log(self, message: str, model: Model, data: {}, result) -> None:
+    def log(self, model: Model, data: {}, result) -> None:
         # Initialize saving if needed
         if len(self.logs_to_save) >= self.save_iteration:
             thread = Thread(target=save_to_file, args=("logs", self.logs_to_save))
@@ -40,8 +40,6 @@ class Logger:
 
         date_time = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
         # FIXME Nie wiem czy ten message potrzebny w sumie
-        entry = {"message": message, "timestamp": date_time, "model": model.name, "result": result, "data": data}
+        entry = {"timestamp": date_time, "model": model.name, "result": result, "data": data}
 
         self.logs_to_save.append(entry)
-
-        print("LOG:", date_time, " ", message, " ", model.name, " ", result, " ", data)

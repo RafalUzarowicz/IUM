@@ -3,7 +3,8 @@ from flask_restful import request
 
 from service.logger import Logger
 from service.models import Model
-from service.errors import error_messages
+from service.errors import errors
+from service.errors import Error
 from service.data_format import columns
 
 
@@ -31,27 +32,27 @@ class ModelResource(Resource):
     def get(self, user_id):
         # Check user id
         if not check_user_id(user_id):
-            return {"error": error_messages["wrong_user_id"]}
+            raise Error(errors["wrong_user_id"])
 
         # Check request data type
         if not request.is_json:
-            return {"error": error_messages["wrong_data_type"]}
+            raise Error(errors["wrong_data_type"])
 
         # Get data
         product_data = request.get_json()
         if product_data is None:
-            return {"error": error_messages["missing_json_data"]}
+            raise Error(errors["missing_json_data"])
 
         # Validate data
         if not check_data(product_data):
-            return {"error": error_messages["wrong_data"]}
+            raise Error(errors["wrong_data"])
 
         # Predict
         picked_model = self.pick_model(user_id)
         result = picked_model.predict(product_data)
 
         # Log
-        self.logger.log("", picked_model, product_data, result)
+        self.logger.log(picked_model, product_data, result)
 
         # Return result
         return {"result": result}
