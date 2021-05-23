@@ -1,5 +1,4 @@
 #TODO:
-# -testy
 # -moze poprawic te errory ale nie wiem czy jest sens
 
 from constants import HOST, PORT
