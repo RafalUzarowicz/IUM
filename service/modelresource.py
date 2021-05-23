@@ -14,7 +14,7 @@ def check_user_id(user_id) -> bool:
 
 
 def check_data(data: {}) -> {}:
-    if not isinstance(data, dict):
+    if data is None or not isinstance(data, dict):
         return errors["wrong_data"]
 
     for column in columns:
