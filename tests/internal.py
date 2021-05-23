@@ -4,7 +4,7 @@ from service.errors import errors
 from service.data_format import purchase_data_example
 
 
-class TestDataCheck(unittest.TestCase):
+class DataCheckTest(unittest.TestCase):
     def test_example(self):
         self.assertIsNone(check_data(purchase_data_example))
 

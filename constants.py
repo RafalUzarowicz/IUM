@@ -2,6 +2,8 @@ import os
 
 PROJECT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
+FLASK_APPLICATION_NAME = "delivery_time_model_app"
+
 HOST = "127.0.0.1"
 PORT = 5000
 

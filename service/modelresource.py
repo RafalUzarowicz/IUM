@@ -10,7 +10,7 @@ from service.data_format import columns
 
 
 def check_user_id(user_id) -> bool:
-    return isinstance(user_id, int)
+    return isinstance(user_id, int) and user_id >= 0
 
 
 def check_data(data: {}) -> {}:
@@ -27,22 +27,30 @@ def check_data(data: {}) -> {}:
         return errors["wrong_purchase_timestamp"]
     # Check delivery company
     try:
-        int(data["delivery_company"])
+        tmp = int(data["delivery_company"])
+        if tmp < 0:
+            return errors["wrong_delivery_company"]
     except ValueError:
         return errors["wrong_delivery_company"]
     # Check product id
     try:
-        int(data["product_id"])
+        tmp = int(data["product_id"])
+        if tmp < 0:
+            return errors["wrong_product_id"]
     except ValueError:
         return errors["wrong_product_id"]
     # Check price
     try:
-        float(data["price"])
+        tmp = float(data["price"])
+        if tmp < 0:
+            return errors["wrong_price"]
     except ValueError:
         return errors["wrong_price"]
     # Check offered discount
     try:
-        int(data["offered_discount"])
+        tmp = int(data["offered_discount"])
+        if tmp < 0:
+            return errors["wrong_offered_discount"]
     except ValueError:
         return errors["wrong_offered_discount"]
     # Check street
