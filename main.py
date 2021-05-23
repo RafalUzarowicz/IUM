@@ -1,3 +1,8 @@
+#TODO:
+# -testy
+# -moze poprawic te errory ale nie wiem czy jest sens
+# -pousuwac magiczne stale?
+
 from flask import Flask, jsonify
 from flask_restful import Api
 

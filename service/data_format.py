@@ -2,22 +2,23 @@ columns = [
     {"name": "purchase_timestamp"},
     {"name": "delivery_company"},
     {"name": "product_id"},
-    {"name": "product_name"},
-    {"name": "category_path"},
+    {"name": "product_name", "pattern": r".*"},
+    {"name": "category_path", "pattern": r".*"},
     {"name": "price"},
     {"name": "offered_discount"},
-    {"name": "city"},
-    {"name": "street"}
+    {"name": "city", "pattern": r".*"},
+    {"name": "street", "pattern": r".*"}
 ]
 # FIXME to tak sobie dla przykladu zrobilem pewnie do usuniecia albo jak sie uzupelni valid rzeczami to do testow
+# TODO street 3 czesci
 purchase_data_example = {
-    "purchase_timestamp": 0,
-    "delivery_company": 1,
-    "product_id": 2,
-    "product_name": 3,
-    "category_path": 4,
-    "price": 5,
-    "offered_discount": 6,
-    "city": 7,
-    "street": 8
+    "purchase_timestamp": "2021-04-01T15:52:47",
+    "delivery_company": 620,
+    "product_id": 1001,
+    "product_name": "Telefon Siemens Gigaset DA310",
+    "category_path": "Telefony i akcesoria;Telefony stacjonarne",
+    "price": 58.97,
+    "offered_discount": 5,
+    "city": "Police",
+    "street": "pl. Brzoskwiniowa 11/53"
 }
