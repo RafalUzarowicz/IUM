@@ -4,7 +4,8 @@ from datetime import datetime
 from pathlib import Path
 from threading import Thread
 
-from constants import PROJECT_DIRECTORY, DEFAULT_LOG_FILES_PREFIX, DEFAULT_LOG_DIR_NAME, LOG_DATETIME_FORMAT, DEFAULT_LOGS_NUMBER
+from constants import PROJECT_DIRECTORY, DEFAULT_LOG_FILES_PREFIX, DEFAULT_LOG_DIR_NAME, LOG_DATETIME_FORMAT, \
+    DEFAULT_LOGS_NUMBER
 from service.models import Model
 
 
@@ -20,7 +21,6 @@ def save_to_file(file_name: str, logs: [], dir_name: str = DEFAULT_LOG_DIR_NAME)
                 outfile.write("\n")
 
 
-
 class Logger:
     def __init__(self, save_iteration: int = DEFAULT_LOGS_NUMBER):
         self.logs_to_save = []
@@ -31,8 +31,7 @@ class Logger:
         for thread in self.threads_list:
             thread.join()
 
-    # TODO tutaj uzupelnic typ result
-    def log(self, model: Model, data: {}, result) -> None:
+    def log(self, model: Model, data: {}, result: int) -> None:
         # Initialize saving if needed
         if len(self.logs_to_save) >= self.save_iteration:
             thread = Thread(target=save_to_file, args=(DEFAULT_LOG_FILES_PREFIX, self.logs_to_save))

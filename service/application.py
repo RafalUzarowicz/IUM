@@ -10,9 +10,9 @@ from service.models import Model
 app = Flask(FLASK_APPLICATION_NAME)
 api = Api(app)
 
-# TODO tutaj uzupelnij modele <3
-simple_m = Model(SIMPLE_MODEL_NAME, "")
-complex_m = Model(COMPLEX_MODEL_NAME, "")
+
+simple_m = Model(SIMPLE_MODEL_NAME, "service/pretrained/linear_regression.pkl")
+complex_m = Model(COMPLEX_MODEL_NAME, "service/pretrained/random_forest.pkl")
 logger = Logger()
 
 
