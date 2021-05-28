@@ -2,12 +2,12 @@ columns = [
     {"name": "purchase_timestamp"},
     {"name": "delivery_company"},
     {"name": "product_id"},
-    {"name": "product_name", "pattern": r".*"},
-    {"name": "category_path", "pattern": r".*"},
+    {"name": "product_name"},
+    {"name": "category_path"},
     {"name": "price"},
     {"name": "offered_discount"},
-    {"name": "city", "pattern": r".*"},
-    {"name": "street", "pattern": r".*"}
+    {"name": "city"},
+    {"name": "street"}
 ]
 
 # Example for tests
