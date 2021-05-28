@@ -1,4 +1,5 @@
 import pickle
+import os
 
 import pandas as pd
 
@@ -6,10 +7,11 @@ from service.preprocessing import apply
 
 
 class Model:
-    ENCODER_FILEPATH = "service/pretrained/oh_encoder.pkl"
+    ENCODER_FILEPATH = os.path.dirname(__file__) + "\\" + os.path.relpath("pretrained/oh_encoder.pkl")
 
     def __init__(self, name: str, plk_file_path: str):
         self.name = name
+        plk_file_path = os.path.dirname(__file__) + "\\" + os.path.relpath(plk_file_path)
         with open(plk_file_path, "rb") as f:
             self.model = pickle.load(f)
             # fixme add oh_encoder file

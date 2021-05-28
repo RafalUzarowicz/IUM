@@ -74,7 +74,51 @@ class ModelResource(Resource):
         self.simple_model = simple_model
         self.complex_model = complex_model
 
-    def get(self, user_id):
+    def get(self, model_name: str = "complex"):
+        # Check model name
+        if model_name not in {"simple", "complex"}:
+            raise Error(errors["wrong_model_name"])
+
+        # Check request data type
+        if not request.is_json:
+            raise Error(errors["wrong_data_type"])
+
+        # Get data
+        product_data = request.get_json()
+        if product_data is None:
+            raise Error(errors["missing_json_data"])
+
+        # Validate data
+        check_data_result = check_data(product_data)
+        if check_data_result is not None:
+            raise Error(check_data_result)
+
+        # Predict
+        picked_model = self.pick_model(model_name)
+        result = picked_model.predict(product_data)
+
+        # Log
+        self.logger.log(picked_model, product_data, result)
+
+        # Return result
+        return {"result": model_name}
+
+    def pick_model(self, model_name: str) -> Model:
+        # Pick model based on user id
+        if model_name == "simple":
+            return self.simple_model
+        elif model_name == "complex":
+            return self.complex_model
+
+
+class TestModelResource(Resource):
+    def __init__(self, simple_model: Model, complex_model: Model, logger: Logger):
+        super()
+        self.logger = logger
+        self.simple_model = simple_model
+        self.complex_model = complex_model
+
+    def get(self, user_id: int):
         # Check user id
         if not check_user_id(user_id):
             raise Error(errors["wrong_user_id"])
@@ -98,7 +142,7 @@ class ModelResource(Resource):
         result = picked_model.predict(product_data)
 
         # Log
-        self.logger.log(picked_model, product_data, result)
+        self.logger.log(picked_model, product_data, result, True)
 
         # Return result
         return {"result": result}
@@ -109,3 +153,20 @@ class ModelResource(Resource):
             return self.simple_model
         else:
             return self.complex_model
+
+
+class UpdateLogger(Resource):
+    def __init__(self, logger: Logger):
+        super()
+        self.logger = logger
+
+    def put(self, log_num: int):
+        # Check
+        if not isinstance(log_num, int) or log_num < 1:
+            raise Error(errors["wrong_log_num"])
+
+        # Set
+        self.logger.save_iteration = log_num
+
+        # Return result
+        return {"result": "Done"}

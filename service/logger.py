@@ -31,7 +31,7 @@ class Logger:
         for thread in self.threads_list:
             thread.join()
 
-    def log(self, model: Model, data: {}, result: int) -> None:
+    def log(self, model: Model, data: {}, result: int, is_experimental: bool = False) -> None:
         # Initialize saving if needed
         if len(self.logs_to_save) >= self.save_iteration:
             thread = Thread(target=save_to_file, args=(DEFAULT_LOG_FILES_PREFIX, self.logs_to_save))
@@ -43,5 +43,5 @@ class Logger:
 
         # Log
         date_time = datetime.now().strftime(LOG_DATETIME_FORMAT)
-        entry = {"timestamp": date_time, "model": model.name, "result": result, "data": data}
+        entry = {"timestamp": date_time, "model": model.name, "result": result, "data": data, "experiment": is_experimental}
         self.logs_to_save.append(entry)

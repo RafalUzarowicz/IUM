@@ -10,7 +10,9 @@ errors = {
     "wrong_price": {"message": "Price is not float", "code": 422},
     "wrong_offered_discount": {"message": "Offered discount is not int", "code": 422},
     "wrong_street": {"message": "Street in wrong format", "code": 422},
-    "wrong_street_number": {"message": "Street number is in wrong format", "code": 422}
+    "wrong_street_number": {"message": "Street number is in wrong format", "code": 422},
+    "wrong_log_num": {"message": "Wrong logs number", "code": 400},
+    "wrong_model_name": {"message": "Wrong model name", "code": 400},
 }
 
 

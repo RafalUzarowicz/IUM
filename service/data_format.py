@@ -9,7 +9,7 @@ columns = [
     {"name": "city", "pattern": r".*"},
     {"name": "street", "pattern": r".*"}
 ]
-# FIXME to tak sobie dla przykladu zrobilem pewnie do usuniecia albo jak sie uzupelni valid rzeczami to do testow
+
 purchase_data_example = {
     "purchase_timestamp": "2021-04-01T15:52:47",
     "delivery_company": 620,
