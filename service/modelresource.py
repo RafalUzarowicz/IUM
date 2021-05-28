@@ -155,7 +155,7 @@ class TestModelResource(Resource):
             return self.complex_model
 
 
-class UpdateLogger(Resource):
+class LoggerResource(Resource):
     def __init__(self, logger: Logger):
         super()
         self.logger = logger

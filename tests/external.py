@@ -2,11 +2,11 @@ import unittest
 
 from service.errors import Error, errors
 from service.logger import Logger
-from service.modelresource import ModelResource, TestModelResource, UpdateLogger
+from service.modelresource import ModelResource, TestModelResource, LoggerResource
 from service.application import app, complex_m, simple_m
 from service.data_format import purchase_data_example
 
-from constants import HOST, PORT
+from constants import PORT
 
 
 class AppTest(unittest.TestCase):
@@ -14,7 +14,7 @@ class AppTest(unittest.TestCase):
         self.app = app
         self.client = self.app.test_client()
         self.app.config["TESTING"] = True
-        self.baseURL = "http://" + HOST + ":" + str(PORT) + "/model"
+        self.baseURL = "http://127.0.0.1:" + str(PORT) + "/model"
         self.payload = purchase_data_example
 
     def test_get(self):
@@ -86,7 +86,7 @@ class ExperimentAppTest(unittest.TestCase):
         self.app = app
         self.client = self.app.test_client()
         self.app.config["TESTING"] = True
-        self.baseURL = "http://" + HOST + ":" + str(PORT) + "/model"
+        self.baseURL = "http://127.0.0.1:" + str(PORT) + "/model"
         self.payload = purchase_data_example
 
     def test_get(self):
@@ -158,7 +158,7 @@ class LoggerTest(unittest.TestCase):
         self.app = app
         self.client = self.app.test_client()
         self.app.config["TESTING"] = True
-        self.baseURL = "http://" + HOST + ":" + str(PORT) + "/test"
+        self.baseURL = "http://127.0.0.1:" + str(PORT) + "/test"
 
     def test_put(self):
         rv = self.client.put("/log/10")
@@ -181,7 +181,7 @@ class LoggerTest(unittest.TestCase):
             -12,
             {}
         ]
-        res = UpdateLogger(Logger())
+        res = LoggerResource(Logger())
         for log_num in logs_nums:
             with self.assertRaises(Error) as ec:
                 res.put(log_num)
@@ -196,7 +196,7 @@ class LoggerTest(unittest.TestCase):
             50
         ]
         logger = Logger()
-        res = UpdateLogger(logger)
+        res = LoggerResource(logger)
         for log_num in logs_nums:
             res.put(log_num)
             self.assertEqual(log_num, logger.save_iteration)

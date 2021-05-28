@@ -4,7 +4,7 @@ from flask_restful import Api
 from constants import COMPLEX_MODEL_NAME, SIMPLE_MODEL_NAME, FLASK_APPLICATION_NAME
 from service.errors import Error
 from service.logger import Logger
-from service.modelresource import ModelResource, UpdateLogger, TestModelResource
+from service.modelresource import ModelResource, LoggerResource, TestModelResource
 from service.models import Model
 
 app = Flask(FLASK_APPLICATION_NAME)
@@ -21,7 +21,7 @@ def handle_invalid_usage(error):
     return response
 
 
-api.add_resource(UpdateLogger, "/log", "/log/<int:log_num>", endpoint="log",
+api.add_resource(LoggerResource, "/log", "/log/<int:log_num>", endpoint="log",
                  resource_class_kwargs={"logger": logger})
 api.add_resource(ModelResource, "/model", "/model/<string:model_name>", endpoint="model",
                  resource_class_kwargs={"simple_model": simple_m, "complex_model": complex_m, "logger": logger})
