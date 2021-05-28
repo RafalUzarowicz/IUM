@@ -152,6 +152,7 @@ class ExperimentAppTest(unittest.TestCase):
             self.assertEqual(errors[changes[i][2]]["message"], rv.get_json()["message"])
             self.assertEqual(errors[changes[i][2]]["code"], rv.status_code)
 
+
 class LoggerTest(unittest.TestCase):
     def setUp(self):
         self.app = app

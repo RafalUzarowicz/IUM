@@ -14,11 +14,9 @@ class Model:
         plk_file_path = os.path.dirname(__file__) + "\\" + os.path.relpath(plk_file_path)
         with open(plk_file_path, "rb") as f:
             self.model = pickle.load(f)
-            # fixme add oh_encoder file
         with open(self.ENCODER_FILEPATH, "rb") as enc:
             self.encoder = pickle.load(enc)
 
-    # todo test for singular example
     def predict(self, data: {}) -> int:
         df = pd.DataFrame({k: [v] for k, v in data.items()})
         df = apply(df)

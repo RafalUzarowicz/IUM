@@ -10,6 +10,8 @@ columns = [
     {"name": "street", "pattern": r".*"}
 ]
 
+# Example for tests
+
 purchase_data_example = {
     "purchase_timestamp": "2021-04-01T15:52:47",
     "delivery_company": 620,
