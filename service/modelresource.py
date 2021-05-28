@@ -101,7 +101,7 @@ class ModelResource(Resource):
         self.logger.log(picked_model, product_data, result)
 
         # Return result
-        return {"result": model_name}
+        return {"result": result}
 
     def pick_model(self, model_name: str) -> Model:
         # Pick model based on user id
